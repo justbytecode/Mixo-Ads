@@ -4,7 +4,6 @@
 
 import { Campaign, SyncResult } from '../types';
 import { SyncWorkerDependencies } from './types';
-import { SyncError } from '../utils/ErrorHandler';
 import { logger } from '../utils/Logger';
 
 /**

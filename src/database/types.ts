@@ -2,7 +2,7 @@
  * Database module type definitions
  */
 
-import { Pool, PoolClient, QueryResult } from 'pg';
+import { Pool, PoolClient, QueryResult, QueryResultRow } from 'pg';
 import { Campaign, CampaignSyncData } from '../types';
 
 /**
@@ -37,7 +37,7 @@ export interface ICampaignRepository {
  */
 export interface IConnectionPool {
   getPool(): Pool;
-  query<T = unknown>(text: string, params?: unknown[]): Promise<QueryResult<T>>;
+  query<T extends QueryResultRow = any>(text: string, params?: unknown[]): Promise<QueryResult<T>>;
   getClient(): Promise<PoolClient>;
   close(): Promise<void>;
   isConnected(): Promise<boolean>;

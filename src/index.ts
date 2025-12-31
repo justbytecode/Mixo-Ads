@@ -7,6 +7,7 @@
 
 import { loadConfig, validateConfig } from './config';
 import { Logger } from './utils/Logger';
+import { LogLevel } from './types';
 import { createTokenManager } from './auth/TokenManager';
 import { createRateLimiter } from './api/RateLimiter';
 import { createApiClient } from './api/ApiClient';
@@ -31,7 +32,7 @@ async function main(): Promise<void> {
 
     // Initialize logger
     logger = Logger.getInstance({
-      level: config.logging.level,
+      level: config.logging.level as LogLevel,
       format: config.logging.format,
     });
 
@@ -100,7 +101,9 @@ async function main(): Promise<void> {
     logger.info('Initializing sync orchestrator...');
     const syncOrchestrator = createSyncOrchestrator({
       fetchAllCampaignsFn: () => campaignService.fetchAllCampaigns(config.sync.pageSize),
-      syncCampaignFn: (id) => campaignService.syncCampaign(id),
+      syncCampaignFn: async (id) => {
+        await campaignService.syncCampaign(id);
+      },
       saveCampaignFn: (campaign) => campaignRepository.saveCampaign(campaign),
       maxConcurrent: config.sync.maxConcurrent,
     });

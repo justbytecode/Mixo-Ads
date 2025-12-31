@@ -87,7 +87,7 @@ export class SyncOrchestrator {
     let failedCount = 0;
 
     // Add all campaigns to queue
-    const promises = campaigns.map((campaign, index) =>
+    const promises = campaigns.map((campaign) =>
       this.queue.add(async () => {
         const result = await this.worker.syncCampaign(campaign);
         results.push(result);

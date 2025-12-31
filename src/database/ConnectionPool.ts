@@ -2,7 +2,7 @@
  * PostgreSQL connection pool manager
  */
 
-import { Pool, PoolClient, PoolConfig, QueryResult } from 'pg';
+import { Pool, PoolClient, PoolConfig, QueryResult, QueryResultRow } from 'pg';
 import { DatabaseConfig, IConnectionPool } from './types';
 import { DatabaseError } from '../utils/ErrorHandler';
 import { logger } from '../utils/Logger';
@@ -52,7 +52,7 @@ export class ConnectionPool implements IConnectionPool {
   /**
    * Execute a query
    */
-  public async query<T = unknown>(
+  public async query<T extends QueryResultRow = any>(
     text: string,
     params?: unknown[]
   ): Promise<QueryResult<T>> {

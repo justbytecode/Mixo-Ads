@@ -7,7 +7,7 @@
 
 import { Token, AuthResponse } from '../types';
 import { AuthCredentials, ITokenManager, TokenRefreshState } from './types';
-import { AuthError, TokenExpiredError } from '../utils/ErrorHandler';
+import { AuthError } from '../utils/ErrorHandler';
 import { logger } from '../utils/Logger';
 import { withRetry } from '../utils/RetryStrategy';
 
@@ -204,7 +204,7 @@ export class TokenManager implements ITokenManager {
         );
       }
 
-      const authResponse: AuthResponse = await response.json();
+      const authResponse = await response.json() as AuthResponse;
 
       // Create token with issued_at timestamp
       const token: Token = {

@@ -2,7 +2,7 @@
  * Sync module type definitions
  */
 
-import { Campaign, SyncResult, SyncReport } from '../types';
+import { Campaign } from '../types';
 
 /**
  * Sync worker dependencies

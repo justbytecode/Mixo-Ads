@@ -7,7 +7,6 @@
 
 import { RateLimitConfig, RateLimitInfo } from './types';
 import { RateLimitState, QueuedRequest } from '../types';
-import { RateLimitError } from '../utils/ErrorHandler';
 import { logger } from '../utils/Logger';
 import { generateId } from '../utils/helpers';
 

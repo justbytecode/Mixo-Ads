@@ -4,7 +4,7 @@
 
 import { ITokenManager } from '../auth/types';
 import { RateLimiter } from './RateLimiter';
-import { RequestOptions, ApiResponse } from './types';
+import { RequestOptions } from './types';
 import {
   ApiError,
   RateLimitError,
@@ -254,7 +254,7 @@ export class ApiClient {
       const contentType = response.headers.get('content-type');
       
       if (contentType?.includes('application/json')) {
-        const json = await response.json();
+        const json = await response.json() as Record<string, any>;
         return json.error?.message || json.message || JSON.stringify(json);
       }
       
